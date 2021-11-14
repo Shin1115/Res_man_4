@@ -103,8 +103,7 @@ body {
     text-decoration: none;
     color: #888;
     display: block;
-    height: 30px;
-    padding-top: 15px;
+    padding-top:0;
 }
 
 .active {

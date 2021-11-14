@@ -7,18 +7,28 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Res_man_4.Models;
+using PagedList.Mvc;
+using PagedList;
+using System.IO;
+using Res_man_4.Controllers;
 
 namespace Res_man_4.Areas.Admin.Controllers
 {
-    public class NHANVIENprofileController : BaseController
+    public class NHANVIENprofileController : BaseHomeController
     {
         private quanlynhahangEntities db = new quanlynhahangEntities();
 
         // GET: Admin/NHANVIENprofile
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            var nHANVIEN = db.NHANVIEN.Include(n => n.TAIKHOAN);
-            return View(nHANVIEN.ToList());
+            //var nHANVIEN = db.NHANVIEN.Include(n => n.TAIKHOAN);
+            //return View(nHANVIEN.ToList());
+            var pageNumber = page ?? 1;
+            var pageSize = 5;
+            List<NHANVIEN> lstnv = db.NHANVIEN.ToList();
+            var nvlst = db.NHANVIEN.OrderByDescending(x => x.manv).ToList().ToPagedList(pageNumber, pageSize);
+            return View(nvlst);
+
         }
 
         // GET: Admin/NHANVIENprofile/Details/5
@@ -57,7 +67,7 @@ namespace Res_man_4.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.matk = new SelectList(db.TAIKHOAN, "matk", "email","taikhoan", nHANVIEN.matk);
+            ViewBag.matk = new SelectList(db.TAIKHOAN, "matk", "email", "taikhoan", nHANVIEN.matk);
             return View(nHANVIEN);
         }
 
@@ -90,7 +100,7 @@ namespace Res_man_4.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.matk = new SelectList(db.TAIKHOAN, "matk", "email","matkhau", nHANVIEN.matk);
+            ViewBag.matk = new SelectList(db.TAIKHOAN, "matk", "email", "matkhau", nHANVIEN.matk);
             return View(nHANVIEN);
         }
 

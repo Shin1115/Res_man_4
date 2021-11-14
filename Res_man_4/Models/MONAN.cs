@@ -19,6 +19,7 @@ namespace Res_man_4.Models
         {
             this.DANHGIA = new HashSet<DANHGIA>();
             this.DATBAN = new HashSet<DATBAN>();
+            this.CHITIETDATBAN = new HashSet<CHITIETDATBAN>();
         }
     
         public int mamonan { get; set; }
@@ -27,13 +28,15 @@ namespace Res_man_4.Models
         public Nullable<System.DateTime> ngaydat { get; set; }
         public Nullable<double> giamonan { get; set; }
         public Nullable<decimal> soluong { get; set; }
-        public byte[] hinhmonan { get; set; }
         public Nullable<decimal> solanmua { get; set; }
+        public string hinhma { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DANHGIA> DANHGIA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DATBAN> DATBAN { get; set; }
         public virtual LOAIMONAN LOAIMONAN { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CHITIETDATBAN> CHITIETDATBAN { get; set; }
     }
 }

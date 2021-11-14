@@ -22,6 +22,7 @@ namespace Res_man_4
         {
             Session["Useradmin"] = "";
             Session["UserID"] = "";
+            Session["Rules"] = "";
         }
     }
 }

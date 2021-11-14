@@ -19,5 +19,7 @@ namespace Res_man_4.Models
         public string tenmonan { get; set; }
         public Nullable<double> giamonan { get; set; }
         public Nullable<decimal> soluong { get; set; }
+    
+        public virtual HOADON HOADON { get; set; }
     }
 }

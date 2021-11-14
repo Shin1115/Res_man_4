@@ -6,11 +6,12 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Res_man_4.Controllers;
 using Res_man_4.Models;
 
 namespace Res_man_4.Areas.Admin.Controllers
 {
-    public class Khachhang_InfController : Controller
+    public class Khachhang_InfController : BaseHomeController
     {
         private quanlynhahangEntities db = new quanlynhahangEntities();
 

@@ -1,0 +1,53 @@
+﻿@*@model IEnumerable<Res_man_4.Models.MONAN>*@
+@model PagedList.IPagedList<Res_man_4.Models.MONAN>
+@using PagedList;
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Danh Sách Món Ăn";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_admin.cshtml";
+}
+
+<h2>Danh Sách Món Ăn</h2>
+
+<form action="/Admin/MonAn/Index" method="post">
+    <a style="text-align:center; display:block; float:right;" href="/Admin/MonAn/Create" class="col-sm-1 btn btn-success">Thêm mới </a>
+</form>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            @*<th>Tên loại</th>*@
+            <th scope="col">Tên món ăn</th>
+            <th scope="col">Ngày đặt</th>
+            <th scope="col">Giá</th>
+            <th scope="col">Số lượng</th>
+            <th scope="col">Hình món ăn</th>
+            @*<th scope="col">Số lần mua</th>*@
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+         {
+             <tr>
+                <td>@item.tenmonan</td>
+                <td>@String.Format("{0:dd/MM/yyyy}", item.ngaydat)</td>
+                <td>@item.giamonan</td>
+                <td>@item.soluong</td>               
+                <td><img src="~/Areas/Admin/UpLoad/HinhMonAn/@item.hinhma" style="width:100px;height:100px;"/></td>
+                @*<td>@item.solanmua</td>*@
+                <td class="">
+                    <a href="/Admin/MonAn/Edit/@item.mamonan">Sửa | </a>
+                    <a href="/Admin/MonAn/Details/@item.mamonan">Chi tiết | </a>
+                    <a href="/Admin/MonAn/Delete/@item.mamonan">Xóa | </a>
+                    <a href="/Admin/Order/Index/@item.mamonan">Order</a>
+                </td>
+            </tr>
+         }
+    </tbody>
+</table>
+<div class="clear"></div>
+Page @(Model.PageCount > Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+<div class="div-pagination">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+</div>

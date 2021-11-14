@@ -24,6 +24,7 @@ namespace Res_man_4.Models
         public int matk { get; set; }
         public string email { get; set; }
         public string matkhau { get; set; }
+        public string rules { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KHACHHANG> KHACHHANG { get; set; }

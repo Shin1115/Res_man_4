@@ -21,8 +21,10 @@ namespace Res_man_4.Models
         public string diachi { get; set; }
         public string email { get; set; }
         public Nullable<decimal> dienthoai { get; set; }
+        public Nullable<int> madatban { get; set; }
     
         public virtual TAIKHOAN TAIKHOAN { get; set; }
         public virtual TINTUC TINTUC { get; set; }
+        public virtual DATBAN DATBAN { get; set; }
     }
 }

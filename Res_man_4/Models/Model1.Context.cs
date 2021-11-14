@@ -36,5 +36,6 @@ namespace Res_man_4.Models
         public virtual DbSet<NHANVIEN> NHANVIEN { get; set; }
         public virtual DbSet<TAIKHOAN> TAIKHOAN { get; set; }
         public virtual DbSet<TINTUC> TINTUC { get; set; }
+        public virtual DbSet<CHITIETDATBAN> CHITIETDATBAN { get; set; }
     }
 }

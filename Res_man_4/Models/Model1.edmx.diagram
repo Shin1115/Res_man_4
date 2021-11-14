@@ -5,17 +5,17 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="30c86a07f3a44b7e9bf5b436bd44143d" Name="Diagram1">
-        <EntityTypeShape EntityType="quanlynhahangModel.BAN" Width="1.5" PointX="2.75" PointY="7.75" />
-        <EntityTypeShape EntityType="quanlynhahangModel.CHITIETHOADON" Width="1.5" PointX="0.5" PointY="11.125" />
-        <EntityTypeShape EntityType="quanlynhahangModel.DANHGIA" Width="1.5" PointX="5" PointY="5.75" />
-        <EntityTypeShape EntityType="quanlynhahangModel.DATBAN" Width="1.5" PointX="5" PointY="2.625" />
-        <EntityTypeShape EntityType="quanlynhahangModel.HOADON" Width="1.5" PointX="5" PointY="8.625" />
-        <EntityTypeShape EntityType="quanlynhahangModel.KHACHHANG" Width="1.5" PointX="9.75" PointY="3.25" />
-        <EntityTypeShape EntityType="quanlynhahangModel.LOAIMONAN" Width="1.5" PointX="0.5" PointY="3" />
-        <EntityTypeShape EntityType="quanlynhahangModel.MONAN" Width="1.5" PointX="2.75" PointY="2.125" />
-        <EntityTypeShape EntityType="quanlynhahangModel.NHANVIEN" Width="1.5" PointX="7.375" PointY="6.5" />
-        <EntityTypeShape EntityType="quanlynhahangModel.TAIKHOAN" Width="1.5" PointX="7.5" PointY="3.625" />
-        <EntityTypeShape EntityType="quanlynhahangModel.TINTUC" Width="1.5" PointX="7.5" PointY="0.5" />
+        <EntityTypeShape EntityType="quanlynhahangModel.BAN" Width="1.5" PointX="1.625" PointY="4.625" />
+        <EntityTypeShape EntityType="quanlynhahangModel.CHITIETHOADON" Width="1.5" PointX="0.5" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="quanlynhahangModel.DANHGIA" Width="1.5" PointX="3.875" PointY="4.75" />
+        <EntityTypeShape EntityType="quanlynhahangModel.DATBAN" Width="1.5" PointX="4.5" PointY="0.5" />
+        <EntityTypeShape EntityType="quanlynhahangModel.HOADON" Width="1.5" PointX="6.625" PointY="3.875" />
+        <EntityTypeShape EntityType="quanlynhahangModel.KHACHHANG" Width="1.5" PointX="10.125" PointY="0.5" />
+        <EntityTypeShape EntityType="quanlynhahangModel.LOAIMONAN" Width="1.5" PointX="0.5" PointY="0.5" />
+        <EntityTypeShape EntityType="quanlynhahangModel.MONAN" Width="1.5" PointX="2.375" PointY="0.5" />
+        <EntityTypeShape EntityType="quanlynhahangModel.NHANVIEN" Width="1.5" PointX="11.25" PointY="3.75" />
+        <EntityTypeShape EntityType="quanlynhahangModel.TAIKHOAN" Width="1.5" PointX="8.375" PointY="3.5" />
+        <EntityTypeShape EntityType="quanlynhahangModel.TINTUC" Width="1.5" PointX="8.125" PointY="0.5" />
         <AssociationConnector Association="quanlynhahangModel.FK_DATBAN_BAN" />
         <AssociationConnector Association="quanlynhahangModel.FK_HOADON_BAN" />
         <AssociationConnector Association="quanlynhahangModel.FK_DANHGIA_monan" />
@@ -24,6 +24,11 @@
         <AssociationConnector Association="quanlynhahangModel.FK_KHACHHANG_TINTUC" />
         <AssociationConnector Association="quanlynhahangModel.FK_MONAN_loaimonan" />
         <AssociationConnector Association="quanlynhahangModel.FK_NHANVIEN_DATBAN" />
+        <AssociationConnector Association="quanlynhahangModel.FK_CHITIETHOADON_HOADON" />
+        <AssociationConnector Association="quanlynhahangModel.FK_KHACHHANG_DATBAN" />
+        <EntityTypeShape EntityType="quanlynhahangModel.CHITIETDATBAN" Width="1.5" PointX="6.375" PointY="0.5" />
+        <AssociationConnector Association="quanlynhahangModel.FK_CHITIETDATBAN_DATBAN" />
+        <AssociationConnector Association="quanlynhahangModel.FK_CHITIETDATBAN_MONAN" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

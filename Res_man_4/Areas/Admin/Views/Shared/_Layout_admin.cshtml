@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
+    @using Res_man_4.Models;
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <script src="~/Scripts/jquery-3.3.1.js"></script>
@@ -12,16 +13,21 @@
     <link rel="stylesheet" href="~/Areas/Admin/Content/form/fontawesome-free-5.15.4/fontawesome-free-5.15.4-web/css/all.css">
     <script src="~/Areas/Admin/Content/JS/jquery.js"></script>
     <script src="~/Areas/Admin/Content/JS/admin.js"></script>
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-    <!-- Bootstrap icons-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.validate.min.js"></script>
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="~/Areas/Admin/ContentOrder/css/styles.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
+    <script src="~/Areas/Admin/dist/js/adminlte.js"></script>
+    <link href="~/Areas/Admin/dist/css/AdminLTE.css" rel="stylesheet" />
+    s
+    <link href="~/Areas/Admin/dist/css/skins/_all-skins.css" rel="stylesheet"
+    <link href="~/Areas/Admin/dist/css/skins/icon.css" rel="stylesheet" />
     <script src="~/Areas/Admin/ContentOrder/js/scripts.js"></script>
-
+    <link href="~/Areas/Admin/ContentOrder/css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    @Styles.Render("~/dist/css")
     @Styles.Render("~/Content/css")
+    @*@Styles.Render("~/ContentOrder/css")*@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
@@ -38,24 +44,24 @@
     <div class="main">
         <ul class="danhmuc">
             <li class="danhmuc_menu">
-                <a href="#" class="icon_home">
+                <a href="~/Admin/Home/Index" class="icon_home">
                     <i class="fas fa-home"></i>
                     <span class="tendanhmuc">Trang chủ</span>
                 </a>
             </li>
-            <li class="danhmuc_menu-list">
-                <span href="" class="icon_home-list">
-                    <span>
-                        <i class="fas fa-user-friends"></i>
-                        <span class="tendanhmuc">Tài khoản</span>
-                    </span>
-                    <span class="danhmuc_menu-icon--list"><i class="fas fa-stream"></i></span>
+            @*<li class="danhmuc_menu-list">
+            <span href="#" class="icon_home-list">
+                <span>
+                    <i class="fas fa-user-friends"></i>
+                    <span class="tendanhmuc">Tài khoản</span>
                 </span>
-                <ul class="danhsach_list">
-                    <li class="danhsach-item">Danh sách TK khách hàng</li>
-                    <li class="danhsach-item">Khách hàng vip</li>
-                </ul>
-            </li>
+                <span class="danhmuc_menu-icon--list"><i class="fas fa-stream"></i></span>
+            </span>
+            <ul class="danhsach_list">
+                <li class="danhsach-item"><a href="#">Danh sách TK khách hàng</a></li>
+                <li class="danhsach-item"><a href="#">Khách hàng vip<</a></li>
+            </ul>
+        </li>*@
             <li class="danhmuc_menu-list">
                 <span class="icon_home-list">
                     <span>
@@ -65,20 +71,21 @@
                     <span class="danhmuc_menu-icon--list"><i class="fas fa-stream"></i></span>
                 </span>
                 <ul class="danhsach_list">
-                    <li class="danhsach-item"><a href="#">Sắp xếp ca làm</a></li>
-                    <li class="danhsach-item"><a href="~/Admin/NHANVIENprofile/Index">Danh sách nhân viên</a></li>*
+                    <li class="danhsach-item"><a href="~/Admin/NHANVIENprofile/Index">Danh sách nhân viên</a></li>
                 </ul>
             </li>
             <li class="danhmuc_menu-list">
                 <span class="icon_home-list">
-                    <span>
-                        <i class="fas fa-chalkboard"></i>
-                        <span class="tendanhmuc">Bàn</span>
-                    </span>
+                    <a href="" class="icon_home">
+                        <span>
+                            <i class="fas fa-chalkboard"></i>
+                            <span class="tendanhmuc">Bàn</span>
+                        </span>
+                    </a>
                     <span class="danhmuc_menu-icon--list"><i class="fas fa-stream"></i></span>
                 </span>
                 <ul class="danhsach_list">
-                    <li><a href="" class="danhsach-item">Danh sách bàn</a></li>
+                    <li><a href="#" class="danhsach-item">Danh sách bàn</a></li>
 
                 </ul>
             </li>
@@ -91,39 +98,39 @@
                     <span class="danhmuc_menu-icon--list"><i class="fas fa-stream"></i></span>
                 </span>
                 <ul class="danhsach_list">
-                    <li><a href="" class="danhsach-item">Thêm món ăn</a></li>
-                    <li><a href="" class="danhsach-item">Quản lý sản phẩm</a></li>
+                    <li><a href="~/Admin/MonAn/Index" class="danhsach-item">Quản lý sản phẩm</a></li>
                 </ul>
             </li>
             <li class="danhmuc_menu">
-                <a href="" class="icon_home">
+                <a href="~/Admin/DatBanCp/Index" class="icon_home">
                     <i class="fas fa-chalkboard"></i>
-                    <span class="tendanhmuc">Đơn hàng</span>
+                    <span class="tendanhmuc">Đơn Hàng</span>
                 </a>
             </li>
             <li class="danhmuc_menu">
-                <a href="" class="icon_home">
+                <a href="~/Admin/Order/Index" class="icon_home">
                     <i class="fas fa-chalkboard"></i>
-                    <span class="tendanhmuc">Thống kê</span>
+                    <span class="tendanhmuc">Order món ăn</span>
                 </a>
             </li>
             <li class="danhmuc_menu">
-                <a href="thongtincanhan.html" class="icon_home">
-                    <i class="fas fa-user-lock"></i>
-                    <span class="tendanhmuc">Thông tin cá nhân</span>
-                </a>
-            </li>
+            <a href="~/Home/Index" class="icon_home">
+                <i class="fas fa-user-lock"></i>
+                <span class="tendanhmuc">Về trang chính</span>
+            </a>
+        </li>
             <li class="danhmuc_menu">
-                <a href="~/Admin/Logout" class="icon_home">
+                <a href="~/Login/Logout" class="icon_home">
                     <i class="fas fa-sign-out-alt"></i>
                     <span class="tendanhmuc">Đăng xuất</span>
                 </a>
             </li>
         </ul>
-        <div class="trangchinh">
+        <div class="trangchinh" style="font-size:small;">
             @RenderBody();
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

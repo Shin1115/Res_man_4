@@ -13,6 +13,17 @@
           <Property Name="khuvuc" Type="varchar" MaxLength="50" />
           <Property Name="soluongban" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
+        <EntityType Name="CHITIETDATBAN">
+          <Key>
+            <PropertyRef Name="madatban" />
+            <PropertyRef Name="mamonan" />
+          </Key>
+          <Property Name="madatban" Type="int" Nullable="false" />
+          <Property Name="mamonan" Type="int" Nullable="false" />
+          <Property Name="temonan" Type="nvarchar" MaxLength="255" />
+          <Property Name="gia" Type="float" />
+          <Property Name="soluong" Type="int" />
+        </EntityType>
         <EntityType Name="CHITIETHOADON">
           <Key>
             <PropertyRef Name="mahoadon" />
@@ -36,10 +47,17 @@
           <Key>
             <PropertyRef Name="madatban" />
           </Key>
-          <Property Name="madatban" Type="int" Nullable="false" />
+          <Property Name="madatban" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="mamonan" Type="int" />
           <Property Name="maban" Type="int" />
-          <Property Name="khuvuc" Type="varchar" MaxLength="50" />
+          <Property Name="tendatban" Type="nvarchar" MaxLength="250" />
+          <Property Name="phuongthucdatban" Type="nvarchar" MaxLength="50" />
+          <Property Name="status" Type="nvarchar" MaxLength="50" />
+          <Property Name="ngaydat" Type="datetime" />
+          <Property Name="tenkh" Type="nvarchar" MaxLength="50" />
+          <Property Name="sodienthoaikh" Type="varchar" MaxLength="50" />
+          <Property Name="emailkh" Type="varchar" MaxLength="50" />
+          <Property Name="diachikh" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="HOADON">
           <Key>
@@ -58,6 +76,7 @@
           <Property Name="makh" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="matin" Type="int" />
           <Property Name="matk" Type="int" />
+          <Property Name="madatban" Type="int" />
           <Property Name="hoten" Type="nvarchar" MaxLength="255" />
           <Property Name="diachi" Type="nvarchar" MaxLength="255" />
           <Property Name="email" Type="varchar" MaxLength="50" />
@@ -74,13 +93,13 @@
           <Key>
             <PropertyRef Name="mamonan" />
           </Key>
-          <Property Name="mamonan" Type="int" Nullable="false" />
+          <Property Name="mamonan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="maloai" Type="int" />
           <Property Name="tenmonan" Type="nvarchar" MaxLength="255" />
           <Property Name="ngaydat" Type="datetime" />
           <Property Name="giamonan" Type="float" />
           <Property Name="soluong" Type="numeric" Precision="18" Scale="0" />
-          <Property Name="hinhmonan" Type="image" />
+          <Property Name="hinhma" Type="nvarchar" MaxLength="255" />
           <Property Name="solanmua" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="NHANVIEN">
@@ -103,6 +122,7 @@
           <Property Name="matk" Type="int" Nullable="false" />
           <Property Name="email" Type="nvarchar" MaxLength="50" />
           <Property Name="matkhau" Type="nvarchar" MaxLength="50" />
+          <Property Name="rules" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="TINTUC">
           <Key>
@@ -113,6 +133,42 @@
           <Property Name="noidung" Type="nvarchar(max)" />
           <Property Name="ngaydang" Type="datetime" />
         </EntityType>
+        <Association Name="FK_CHITIETDATBAN_DATBAN">
+          <End Role="DATBAN" Type="Self.DATBAN" Multiplicity="1" />
+          <End Role="CHITIETDATBAN" Type="Self.CHITIETDATBAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DATBAN">
+              <PropertyRef Name="madatban" />
+            </Principal>
+            <Dependent Role="CHITIETDATBAN">
+              <PropertyRef Name="madatban" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CHITIETDATBAN_MONAN">
+          <End Role="MONAN" Type="Self.MONAN" Multiplicity="1" />
+          <End Role="CHITIETDATBAN" Type="Self.CHITIETDATBAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MONAN">
+              <PropertyRef Name="mamonan" />
+            </Principal>
+            <Dependent Role="CHITIETDATBAN">
+              <PropertyRef Name="mamonan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CHITIETHOADON_HOADON">
+          <End Role="HOADON" Type="Self.HOADON" Multiplicity="1" />
+          <End Role="CHITIETHOADON" Type="Self.CHITIETHOADON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HOADON">
+              <PropertyRef Name="mahoadon" />
+            </Principal>
+            <Dependent Role="CHITIETHOADON">
+              <PropertyRef Name="mahoadon" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DANHGIA_monan">
           <End Role="MONAN" Type="Self.MONAN" Multiplicity="0..1" />
           <End Role="DANHGIA" Type="Self.DANHGIA" Multiplicity="*" />
@@ -137,18 +193,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DATBAN_MONAN">
-          <End Role="MONAN" Type="Self.MONAN" Multiplicity="0..1" />
-          <End Role="DATBAN" Type="Self.DATBAN" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MONAN">
-              <PropertyRef Name="mamonan" />
-            </Principal>
-            <Dependent Role="DATBAN">
-              <PropertyRef Name="mamonan" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_HOADON_BAN">
           <End Role="BAN" Type="Self.BAN" Multiplicity="0..1" />
           <End Role="HOADON" Type="Self.HOADON" Multiplicity="*" />
@@ -158,6 +202,18 @@
             </Principal>
             <Dependent Role="HOADON">
               <PropertyRef Name="maban" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KHACHHANG_DATBAN">
+          <End Role="DATBAN" Type="Self.DATBAN" Multiplicity="0..1" />
+          <End Role="KHACHHANG" Type="Self.KHACHHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DATBAN">
+              <PropertyRef Name="madatban" />
+            </Principal>
+            <Dependent Role="KHACHHANG">
+              <PropertyRef Name="madatban" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -211,6 +267,7 @@
         </Association>
         <EntityContainer Name="quanlynhahangModelStoreContainer">
           <EntitySet Name="BAN" EntityType="Self.BAN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CHITIETDATBAN" EntityType="Self.CHITIETDATBAN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CHITIETHOADON" EntityType="Self.CHITIETHOADON" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DANHGIA" EntityType="Self.DANHGIA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DATBAN" EntityType="Self.DATBAN" Schema="dbo" store:Type="Tables" />
@@ -221,6 +278,18 @@
           <EntitySet Name="NHANVIEN" EntityType="Self.NHANVIEN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TAIKHOAN" EntityType="Self.TAIKHOAN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TINTUC" EntityType="Self.TINTUC" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CHITIETDATBAN_DATBAN" Association="Self.FK_CHITIETDATBAN_DATBAN">
+            <End Role="DATBAN" EntitySet="DATBAN" />
+            <End Role="CHITIETDATBAN" EntitySet="CHITIETDATBAN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CHITIETDATBAN_MONAN" Association="Self.FK_CHITIETDATBAN_MONAN">
+            <End Role="MONAN" EntitySet="MONAN" />
+            <End Role="CHITIETDATBAN" EntitySet="CHITIETDATBAN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CHITIETHOADON_HOADON" Association="Self.FK_CHITIETHOADON_HOADON">
+            <End Role="HOADON" EntitySet="HOADON" />
+            <End Role="CHITIETHOADON" EntitySet="CHITIETHOADON" />
+          </AssociationSet>
           <AssociationSet Name="FK_DANHGIA_monan" Association="Self.FK_DANHGIA_monan">
             <End Role="MONAN" EntitySet="MONAN" />
             <End Role="DANHGIA" EntitySet="DANHGIA" />
@@ -229,13 +298,13 @@
             <End Role="BAN" EntitySet="BAN" />
             <End Role="DATBAN" EntitySet="DATBAN" />
           </AssociationSet>
-          <AssociationSet Name="FK_DATBAN_MONAN" Association="Self.FK_DATBAN_MONAN">
-            <End Role="MONAN" EntitySet="MONAN" />
-            <End Role="DATBAN" EntitySet="DATBAN" />
-          </AssociationSet>
           <AssociationSet Name="FK_HOADON_BAN" Association="Self.FK_HOADON_BAN">
             <End Role="BAN" EntitySet="BAN" />
             <End Role="HOADON" EntitySet="HOADON" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KHACHHANG_DATBAN" Association="Self.FK_KHACHHANG_DATBAN">
+            <End Role="DATBAN" EntitySet="DATBAN" />
+            <End Role="KHACHHANG" EntitySet="KHACHHANG" />
           </AssociationSet>
           <AssociationSet Name="FK_KHACHHANG_TAIKHOAN" Association="Self.FK_KHACHHANG_TAIKHOAN">
             <End Role="TAIKHOAN" EntitySet="TAIKHOAN" />
@@ -302,6 +371,23 @@
             <End Role="TAIKHOAN" EntitySet="TAIKHOAN" />
             <End Role="NHANVIEN" EntitySet="NHANVIEN" />
           </AssociationSet>
+          <AssociationSet Name="FK_CHITIETHOADON_HOADON" Association="quanlynhahangModel.FK_CHITIETHOADON_HOADON">
+            <End Role="HOADON" EntitySet="HOADON" />
+            <End Role="CHITIETHOADON" EntitySet="CHITIETHOADON" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KHACHHANG_DATBAN" Association="quanlynhahangModel.FK_KHACHHANG_DATBAN">
+            <End Role="DATBAN" EntitySet="DATBAN" />
+            <End Role="KHACHHANG" EntitySet="KHACHHANG" />
+          </AssociationSet>
+          <EntitySet Name="CHITIETDATBAN" EntityType="quanlynhahangModel.CHITIETDATBAN" />
+          <AssociationSet Name="FK_CHITIETDATBAN_DATBAN" Association="quanlynhahangModel.FK_CHITIETDATBAN_DATBAN">
+            <End Role="DATBAN" EntitySet="DATBAN" />
+            <End Role="CHITIETDATBAN" EntitySet="CHITIETDATBAN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CHITIETDATBAN_MONAN" Association="quanlynhahangModel.FK_CHITIETDATBAN_MONAN">
+            <End Role="MONAN" EntitySet="MONAN" />
+            <End Role="CHITIETDATBAN" EntitySet="CHITIETDATBAN" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="BAN">
           <Key>
@@ -323,6 +409,7 @@
           <Property Name="tenmonan" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="giamonan" Type="Double" />
           <Property Name="soluong" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="HOADON" Relationship="quanlynhahangModel.FK_CHITIETHOADON_HOADON" FromRole="CHITIETHOADON" ToRole="HOADON" />
         </EntityType>
         <EntityType Name="DANHGIA">
           <Key>
@@ -340,9 +427,18 @@
           <Property Name="madatban" Type="Int32" Nullable="false" />
           <Property Name="mamonan" Type="Int32" />
           <Property Name="maban" Type="Int32" />
-          <Property Name="khuvuc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="BAN" Relationship="quanlynhahangModel.FK_DATBAN_BAN" FromRole="DATBAN" ToRole="BAN" />
           <NavigationProperty Name="MONAN" Relationship="quanlynhahangModel.FK_DATBAN_MONAN" FromRole="DATBAN" ToRole="MONAN" />
+          <Property Name="tendatban" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="phuongthucdatban" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ngaydat" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="KHACHHANG" Relationship="quanlynhahangModel.FK_KHACHHANG_DATBAN" FromRole="DATBAN" ToRole="KHACHHANG" />
+          <Property Name="tenkh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sodienthoaikh" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="emailkh" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="diachikh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CHITIETDATBAN" Relationship="quanlynhahangModel.FK_CHITIETDATBAN_DATBAN" FromRole="DATBAN" ToRole="CHITIETDATBAN" />
         </EntityType>
         <EntityType Name="HOADON">
           <Key>
@@ -354,6 +450,7 @@
           <Property Name="maban" Type="Int32" />
           <Property Name="status" Type="Int32" />
           <NavigationProperty Name="BAN" Relationship="quanlynhahangModel.FK_HOADON_BAN" FromRole="HOADON" ToRole="BAN" />
+          <NavigationProperty Name="CHITIETHOADON" Relationship="quanlynhahangModel.FK_CHITIETHOADON_HOADON" FromRole="HOADON" ToRole="CHITIETHOADON" />
         </EntityType>
         <EntityType Name="KHACHHANG">
           <Key>
@@ -368,6 +465,8 @@
           <Property Name="dienthoai" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="TAIKHOAN" Relationship="quanlynhahangModel.FK_KHACHHANG_TAIKHOAN" FromRole="KHACHHANG" ToRole="TAIKHOAN" />
           <NavigationProperty Name="TINTUC" Relationship="quanlynhahangModel.FK_KHACHHANG_TINTUC" FromRole="KHACHHANG" ToRole="TINTUC" />
+          <Property Name="madatban" Type="Int32" />
+          <NavigationProperty Name="DATBAN" Relationship="quanlynhahangModel.FK_KHACHHANG_DATBAN" FromRole="KHACHHANG" ToRole="DATBAN" />
         </EntityType>
         <EntityType Name="LOAIMONAN">
           <Key>
@@ -387,11 +486,12 @@
           <Property Name="ngaydat" Type="DateTime" Precision="3" />
           <Property Name="giamonan" Type="Double" />
           <Property Name="soluong" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="hinhmonan" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="solanmua" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="DANHGIA" Relationship="quanlynhahangModel.FK_DANHGIA_monan" FromRole="MONAN" ToRole="DANHGIA" />
           <NavigationProperty Name="DATBAN" Relationship="quanlynhahangModel.FK_DATBAN_MONAN" FromRole="MONAN" ToRole="DATBAN" />
           <NavigationProperty Name="LOAIMONAN" Relationship="quanlynhahangModel.FK_MONAN_loaimonan" FromRole="MONAN" ToRole="LOAIMONAN" />
+          <NavigationProperty Name="CHITIETDATBAN" Relationship="quanlynhahangModel.FK_CHITIETDATBAN_MONAN" FromRole="MONAN" ToRole="CHITIETDATBAN" />
+          <Property Name="hinhma" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="NHANVIEN">
           <Key>
@@ -416,6 +516,7 @@
           <Property Name="matkhau" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="KHACHHANG" Relationship="quanlynhahangModel.FK_KHACHHANG_TAIKHOAN" FromRole="TAIKHOAN" ToRole="KHACHHANG" />
           <NavigationProperty Name="NHANVIEN" Relationship="quanlynhahangModel.FK_NHANVIEN_DATBAN" FromRole="TAIKHOAN" ToRole="NHANVIEN" />
+          <Property Name="rules" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="TINTUC">
           <Key>
@@ -523,6 +624,67 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CHITIETHOADON_HOADON">
+          <End Type="quanlynhahangModel.HOADON" Role="HOADON" Multiplicity="1" />
+          <End Type="quanlynhahangModel.CHITIETHOADON" Role="CHITIETHOADON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HOADON">
+              <PropertyRef Name="mahoadon" />
+            </Principal>
+            <Dependent Role="CHITIETHOADON">
+              <PropertyRef Name="mahoadon" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KHACHHANG_DATBAN">
+          <End Type="quanlynhahangModel.DATBAN" Role="DATBAN" Multiplicity="0..1" />
+          <End Type="quanlynhahangModel.KHACHHANG" Role="KHACHHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DATBAN">
+              <PropertyRef Name="madatban" />
+            </Principal>
+            <Dependent Role="KHACHHANG">
+              <PropertyRef Name="madatban" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CHITIETDATBAN">
+          <Key>
+            <PropertyRef Name="madatban" />
+            <PropertyRef Name="mamonan" />
+          </Key>
+          <Property Name="madatban" Type="Int32" Nullable="false" />
+          <Property Name="mamonan" Type="Int32" Nullable="false" />
+          <Property Name="gia" Type="Double" />
+          <Property Name="soluong" Type="Int32" />
+          <NavigationProperty Name="DATBAN" Relationship="quanlynhahangModel.FK_CHITIETDATBAN_DATBAN" FromRole="CHITIETDATBAN" ToRole="DATBAN" />
+          <NavigationProperty Name="MONAN" Relationship="quanlynhahangModel.FK_CHITIETDATBAN_MONAN" FromRole="CHITIETDATBAN" ToRole="MONAN" />
+          <Property Name="temonan" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_CHITIETDATBAN_DATBAN">
+          <End Type="quanlynhahangModel.DATBAN" Role="DATBAN" Multiplicity="1" />
+          <End Type="quanlynhahangModel.CHITIETDATBAN" Role="CHITIETDATBAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DATBAN">
+              <PropertyRef Name="madatban" />
+            </Principal>
+            <Dependent Role="CHITIETDATBAN">
+              <PropertyRef Name="madatban" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CHITIETDATBAN_MONAN">
+          <End Type="quanlynhahangModel.MONAN" Role="MONAN" Multiplicity="1" />
+          <End Type="quanlynhahangModel.CHITIETDATBAN" Role="CHITIETDATBAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MONAN">
+              <PropertyRef Name="mamonan" />
+            </Principal>
+            <Dependent Role="CHITIETDATBAN">
+              <PropertyRef Name="mamonan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -561,7 +723,14 @@
           <EntitySetMapping Name="DATBAN">
             <EntityTypeMapping TypeName="quanlynhahangModel.DATBAN">
               <MappingFragment StoreEntitySet="DATBAN">
-                <ScalarProperty Name="khuvuc" ColumnName="khuvuc" />
+                <ScalarProperty Name="diachikh" ColumnName="diachikh" />
+                <ScalarProperty Name="emailkh" ColumnName="emailkh" />
+                <ScalarProperty Name="sodienthoaikh" ColumnName="sodienthoaikh" />
+                <ScalarProperty Name="tenkh" ColumnName="tenkh" />
+                <ScalarProperty Name="ngaydat" ColumnName="ngaydat" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="phuongthucdatban" ColumnName="phuongthucdatban" />
+                <ScalarProperty Name="tendatban" ColumnName="tendatban" />
                 <ScalarProperty Name="maban" ColumnName="maban" />
                 <ScalarProperty Name="mamonan" ColumnName="mamonan" />
                 <ScalarProperty Name="madatban" ColumnName="madatban" />
@@ -582,6 +751,7 @@
           <EntitySetMapping Name="KHACHHANG">
             <EntityTypeMapping TypeName="quanlynhahangModel.KHACHHANG">
               <MappingFragment StoreEntitySet="KHACHHANG">
+                <ScalarProperty Name="madatban" ColumnName="madatban" />
                 <ScalarProperty Name="dienthoai" ColumnName="dienthoai" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="diachi" ColumnName="diachi" />
@@ -603,8 +773,8 @@
           <EntitySetMapping Name="MONAN">
             <EntityTypeMapping TypeName="quanlynhahangModel.MONAN">
               <MappingFragment StoreEntitySet="MONAN">
+                <ScalarProperty Name="hinhma" ColumnName="hinhma" />
                 <ScalarProperty Name="solanmua" ColumnName="solanmua" />
-                <ScalarProperty Name="hinhmonan" ColumnName="hinhmonan" />
                 <ScalarProperty Name="soluong" ColumnName="soluong" />
                 <ScalarProperty Name="giamonan" ColumnName="giamonan" />
                 <ScalarProperty Name="ngaydat" ColumnName="ngaydat" />
@@ -631,6 +801,7 @@
           <EntitySetMapping Name="TAIKHOAN">
             <EntityTypeMapping TypeName="quanlynhahangModel.TAIKHOAN">
               <MappingFragment StoreEntitySet="TAIKHOAN">
+                <ScalarProperty Name="rules" ColumnName="rules" />
                 <ScalarProperty Name="matkhau" ColumnName="matkhau" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="matk" ColumnName="matk" />
@@ -644,6 +815,17 @@
                 <ScalarProperty Name="noidung" ColumnName="noidung" />
                 <ScalarProperty Name="tieude" ColumnName="tieude" />
                 <ScalarProperty Name="matin" ColumnName="matin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CHITIETDATBAN">
+            <EntityTypeMapping TypeName="quanlynhahangModel.CHITIETDATBAN">
+              <MappingFragment StoreEntitySet="CHITIETDATBAN">
+                <ScalarProperty Name="temonan" ColumnName="temonan" />
+                <ScalarProperty Name="soluong" ColumnName="soluong" />
+                <ScalarProperty Name="gia" ColumnName="gia" />
+                <ScalarProperty Name="mamonan" ColumnName="mamonan" />
+                <ScalarProperty Name="madatban" ColumnName="madatban" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

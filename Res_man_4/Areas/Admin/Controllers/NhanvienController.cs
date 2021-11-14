@@ -1,4 +1,5 @@
-﻿using Res_man_4.Models;
+﻿using Res_man_4.Controllers;
+using Res_man_4.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Web.Mvc;
 
 namespace Res_man_4.Areas.Admin.Controllers
 {
-    public class NhanvienController : Controller
+    public class NhanvienController : BaseHomeController
     {
         // GET: Admin/Nhanvien
         quanlynhahangEntities db = new quanlynhahangEntities();
@@ -30,7 +31,7 @@ namespace Res_man_4.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Edit(string id, string idtk)
+        public ActionResult Edit(string id)
         {
             NHANVIEN nv = db.NHANVIEN.Find(id);
             return View(nv);

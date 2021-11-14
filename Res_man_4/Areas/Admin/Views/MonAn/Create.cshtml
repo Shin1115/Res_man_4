@@ -1,0 +1,43 @@
+﻿@model Res_man_4.Models.MONAN
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_admin.cshtml";
+}
+
+<h2>Create</h2>
+
+@*@using (Html.BeginForm())
+{*@
+    @Html.AntiForgeryToken()
+<form action="/Admin/MonAn/Create" method="post" enctype="multipart/form-data" class="form-horizontal">
+    <div class="form-group col-md-10">
+        <label class="col-md-2">Tên món ăn</label>
+        <input type="text" class="form-control" id="tenmonan" name="tenmonan" />
+    </div>
+    <div class="form-group col-md-10">
+        <label class="col-md-2">Ngày đặt</label>
+        <input type="text" class="form-control" id="ngaydat" name="ngaydat" />
+    </div>
+    <div class="form-group col-md-10">
+        <label class="col-md-2">Giá</label>
+        <input type="text" class="form-control" id="giamonan" name="giamonan" />
+    </div>
+    <div class="form-group col-md-10">
+        <label class="col-md-2">Số lượng</label>
+        <input type="text" class="form-control" id="soluong" name="soluong" />
+    </div>
+    <div class="form-group col-md-10">
+        <label class="col-md-2">Hình ảnh</label>
+        <input type="file" class="" id="uploadhinh" name="uploadhinh" accept="image/*" />
+    </div>
+    <div class=" col-md-10">
+        <button class="btn btn-primary" type="submit">Lưu</button>
+    </div>
+
+</form>
+    
+@*}*@
+<div class="col-md-8">
+    @Html.ActionLink("Back to List", "Index")
+</div>

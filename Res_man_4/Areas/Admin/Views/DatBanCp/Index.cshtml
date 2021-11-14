@@ -1,0 +1,89 @@
+﻿
+@using Res_man_4.Models
+@model PagedList.IPagedList<Res_man_4.Models.DATBAN>
+@using PagedList;
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_admin.cshtml";
+}
+
+<h2>Đơn đặt món</h2>
+
+<table class="table">
+    <tr>
+
+        <th>
+            Tên Khách Hàng
+        </th>
+        <th>
+            Phương thức đặt
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            Ngày đặt
+        </th>
+        <th>
+            Số điện thoại
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Địa chỉ
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.BAN.khuvuc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MONAN.tenmonan)
+            </th>*@
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.tenkh)                
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.phuongthucdatban)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.status)
+            </td>
+            <td>
+                @String.Format("{0:dd/MM/yyyy}", item.ngaydat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sodienthoaikh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.emailkh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.diachikh)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.BAN.khuvuc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MONAN.tenmonan)
+                </td>*@
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.madatban }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.madatban })
+            </td>
+        </tr>
+    }
+</table>
+@if (Model.PageCount > 1)
+{
+    <span>Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount </span>
+    <div class="div-pagination">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+    </div>
+}

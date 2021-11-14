@@ -1,0 +1,117 @@
+﻿@using Res_man_4.Models;
+@{
+    ViewBag.Title = "CheckOut";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_admin.cshtml";
+}
+
+<h2>CheckOut</h2>
+@{
+    if (Session["Cart"] != null)
+    {
+        //using (Html.BeginForm("Update", "ShoppingCart", FormMethod.Post))
+        //{
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    @*<th scope="col">Mã món ăn</th>*@
+                    @*<th>Tên loại</th>*@
+                    <th scope="col">Tên món ăn</th>
+                    <th scope="col">Ngày đặt</th>
+                    <th scope="col">Giá</th>
+                    <th scope="col">Số lượng</th>
+                    @*<th>Hình món ăn</th>*@
+                    @*<th scope="col">Số lần mua</th>*@
+                    <th scope="col">Tổng</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var cart in (List<Cart>)Session["Cart"])
+                {
+                    <tr>
+                        @*<td>@cart.Monan.mamonan</td>*@
+                        @*<td>@cart.maloai</td>*@
+                        <td>@cart.Monan.tenmonan</td>
+                        <td>@cart.Monan.ngaydat</td>
+                        <td>@cart.Monan.giamonan</td>
+                        @*<td>@cart.Soluong</td>*@
+                        @*<td>@item.hinhmonan</td>*@
+                        <td><input type="text" name="soluong" id="soluong" class="input input-group-lg" value="@cart.Soluong" /></td>
+                        &nbsp;
+                        <span id="errormess" style="color:red;"></span>
+                        <td>@(String.Format("{0:N0}", cart.Monan.giamonan * cart.Soluong))</td>
+                        <td class="">
+                            @*<a href="/Admin/MonAn/Edit/@cart.mamonan">Sửa | </a>*@
+                            @*<a href="/Admin/MonAn/Details/@cart.mamonan">Chi tiết | </a>*@
+                            @Html.ActionLink("Xóa", "Delete", "ShoppingCart", new { id = cart.Monan.mamonan },
+                        new { onclick = "return confirm('Are you sure you want to delete');" })
+                            @*<a href="/Admin/Order/Index/@cart.mamonan">Order</a>*@
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td colspan="3" class="">Total</td>
+                    <td>
+                        @{
+                            List<Cart> temp = (List<Cart>)Session["Cart"];
+                            var total = String.Format("{0:N0}", temp.Sum(x => x.Soluong * x.Monan.giamonan));
+                        }
+                        @total VND
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        //}
+    }
+    else
+    {
+        <h4>Không có món nào trong giỏ</h4>
+    }
+}
+
+@using (Html.BeginForm("ProcessOrder", "ShoppingCart", FormMethod.Post, new {id="customer-form"}))
+{
+    <table class="table table-bordered table-striped">
+        <tr>
+            <td colspan="3" style="text-align:center;"><b>Thông tin khách hàng</b></td>
+        </tr>
+
+        <tr>
+            <td>Tên khách hàng</td>
+            <td><input type="text" name="tenkh" /></td>
+        </tr>
+        <tr>
+            <td>Địa chỉ</td>
+            <td><input type="text" name="diachikh" /></td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td><input type="text" name="Emailkh" /></td>
+        </tr>
+        <tr>
+            <td>Số điện thoại</td>
+            <td><input type="text" name="sodienthoaikh" /></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Process Order" /></td>
+        </tr>
+    </table>
+ } 
+
+<script type="text/javascript">
+    $("#customer-form").validate({
+        rules: {
+            tenkh: {
+                required: true
+            },
+            diachikh: {
+                required: true
+            },
+            Emailkh: {
+                required: true
+            },
+            sodienthoaikh: {
+                required: true
+            }
+        }
+    });
+</script>  

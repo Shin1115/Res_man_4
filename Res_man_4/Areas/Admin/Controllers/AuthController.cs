@@ -18,9 +18,9 @@ namespace Res_man_4.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Login(FormCollection filed, string uremail)
         {
-            String user = filed["email"];
-            String pass =MyString.toMD5(filed["password"]);
-            String error = "";
+            string user = filed["email"];
+            string pass =MyString.toMD5(filed["password"]);
+            string error = "";
             //xuly
             TAIKHOAN checkrow = getRow(user);
             if (checkrow != null)
@@ -30,6 +30,7 @@ namespace Res_man_4.Areas.Admin.Controllers
                 {
                     Session["Useradmin"] = checkrow.email;
                     Session["UserID"] =checkrow.matk.ToString() ;
+                    Session["Rules"] = checkrow.rules;
                     return RedirectToAction("Index","Home");
                 }
                 else
@@ -47,7 +48,7 @@ namespace Res_man_4.Areas.Admin.Controllers
         }
         public TAIKHOAN getRow(string useremail)
         {
-            var finerow = db.TAIKHOAN.Where(x => x.email == useremail).FirstOrDefault();
+            var finerow = db.TAIKHOAN.Where(x =>x.email == useremail).FirstOrDefault();
             return finerow;
         }
 

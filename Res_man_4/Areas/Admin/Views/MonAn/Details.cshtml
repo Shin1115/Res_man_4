@@ -1,0 +1,75 @@
+﻿@model Res_man_4.Models.MONAN
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_admin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MONAN</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Tên món ăn
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tenmonan)
+        </dd>
+
+        <dt>
+            Ngày đặt
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ngaydat)
+        </dd>
+
+        <dt>
+            Giá món ăn
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.giamonan)
+        </dd>
+
+        <dt>
+            Số lượng
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.soluong)
+        </dd>
+
+        <dt>
+            Hình ảnh
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hinhma)
+        </dd>
+
+        <dt>
+            Số lần mua
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.solanmua)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.LOAIMONAN.tenloai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LOAIMONAN.tenloai)
+        </dd>*@
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.mamonan }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

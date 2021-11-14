@@ -1,0 +1,47 @@
+﻿@model Res_man_4.Models.MONAN
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_admin.cshtml";
+}
+
+<h2>Edit</h2>
+
+@*@using (Html.BeginForm())
+{*@
+    @*@Html.AntiForgeryToken()*@
+    
+<form action="/Admin/MonAn/Edit" method="post" enctype="multipart/form-data" class="form-horizontal">
+    <div class="form-group col-md-10">>
+        <input type="text" class="form-control col-md-2" value="@Model.mamonan" id="mamonan" name="mamonan" />
+    </div>
+    <div class="form-group col-md-10">
+        <label class="col-md-2">Tên món ăn</label>
+        <input type="text" class="form-control" value="@Model.tenmonan" id="tenmonan" name="tenmonan" />
+    </div>
+    <div class="form-group col-md-10">
+        <label class="col-md-2">Ngày đặt</label>
+        <input type="text" class="form-control" value="@Model.ngaydat" id="ngaydat" name="ngaydat" />
+    </div>
+    <div class="form-group col-md-10">
+        <label class="col-md-2">Giá</label>
+        <input type="text" class="form-control" value="@Model.giamonan" id="giamonan" name="giamonan" />
+    </div>
+    <div class="form-group col-md-10">
+        <label class="col-md-2">Số lượng</label>
+        <input type="text" class="form-control" value="@Model.soluong" id="soluong" name="soluong" />
+    </div>
+    <div class="form-group col-md-10">
+        <label class="col-md-2">Hình ảnh</label>
+        <input type="file" id="uploadhinh" name="uploadhinh" accept="image/*" />
+    </div>
+    <div class="col-md-10">
+        <button class="btn btn-primary" type="submit">Lưu</button>
+    </div>
+
+</form>
+@*}*@
+
+<div class="col-md-10">
+    @Html.ActionLink("Back to List", "Index")
+</div>

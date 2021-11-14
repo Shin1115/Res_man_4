@@ -1,0 +1,109 @@
+﻿@model Res_man_4.Models.DATBAN
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_admin.cshtml";
+}
+
+<h2>Đặt bàn chi tiết</h2>
+
+<div>
+    <h4>DATBAN: @Html.DisplayFor(model=>model.madatban)</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            Tên khách hàng
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tenkh)
+        </dd>
+
+        <dt>
+            Thanh toán            
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phuongthucdatban)
+        </dd>
+
+        <dt>
+            Status
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.status)
+        </dd>
+
+        <dt>
+            Ngày Đặt
+        </dt>
+
+        <dd>
+            @String.Format("{0:dd/MM/yyyy}", Model.ngaydat)
+        </dd>
+
+        <dt>
+            Số điện thoại
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sodienthoaikh)
+        </dd>
+
+        <dt>
+            Email
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.emailkh)
+        </dd>
+
+        <dt>
+            Địa chỉ
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.diachikh)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.BAN.khuvuc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BAN.khuvuc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MONAN.tenmonan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MONAN.tenmonan)
+        </dd>*@
+
+    </dl>
+</div>
+
+<table class="table table-condensed">
+    <tr>
+        <th>Tên món ăn</th>
+        <th>Số lượng</th>
+        <th>Giá</th>
+    </tr>
+    @foreach(var item in Model.CHITIETDATBAN)
+    {
+        <tr>
+            <td>@item.temonan</td>
+            <td>@item.soluong</td>
+            <td>@(String.Format("{0:N0}",item.gia))</td>
+        </tr>
+    }
+
+</table>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.madatban }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

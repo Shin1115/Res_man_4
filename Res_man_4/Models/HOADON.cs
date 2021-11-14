@@ -14,6 +14,12 @@ namespace Res_man_4.Models
     
     public partial class HOADON
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public HOADON()
+        {
+            this.CHITIETHOADON = new HashSet<CHITIETHOADON>();
+        }
+    
         public int mahoadon { get; set; }
         public Nullable<System.DateTime> ngaynhap { get; set; }
         public Nullable<System.DateTime> ngayxuat { get; set; }
@@ -21,5 +27,7 @@ namespace Res_man_4.Models
         public Nullable<int> status { get; set; }
     
         public virtual BAN BAN { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CHITIETHOADON> CHITIETHOADON { get; set; }
     }
 }
