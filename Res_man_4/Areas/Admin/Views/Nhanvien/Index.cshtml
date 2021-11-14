@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_admin.cshtml";
+}
+
+<h2>Index</h2>
+<form action="/Admin/Nhanvien/Index" method="post">
+    <a href="/Admin/Nhanvien/Create">Thêm mới</a>
+</form>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>Mã nhân viên</td>
+            <td>Tên nhân viên</td>
+            <td>Chức vụ</td>
+            <td>Ca làm</td>
+            <td>Khu vực</td>
+            <td>Địa chỉ</td>
+            <td>Số điện thoại</td>
+            <td>Sửa</td>
+            <td>Xóa</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.manv</td>
+                <td>@item.tennv</td>
+                <td>@item.Chucvu</td>
+                <td>@item.calam</td>
+                <td>@item.khuvuc </td>
+                <td>@item.diachi</td>
+                <td>@item.sodienthoai</td>
+                <td><a href="/Admin/Nhanvien/Edit/@item.manv">Sửa</a></td>
+                <td><a href="/Admin/Nhanvien/Detele/@item.manv">Xóa</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+

@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Res_man_4.Models.NHANVIEN>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_admin.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th scope="col">
+            Mã Nhân Viên
+        </th>
+        <th scope="col">
+            Chức Vụ
+        </th>
+        <th scope="col">
+            Ca Làm
+        </th>
+        <th scope="col">
+            Khu Vực
+        </th>
+        <th scope="col">
+            Địa chỉ
+        </th>
+        <th scope="col">
+            Số Điện Thoại
+        </th>
+        <th scope="col">
+            Email
+        </th>
+        <th scope="col"></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.tennv)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Chucvu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.calam)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.khuvuc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.diachi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sodienthoai)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TAIKHOAN.email)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.manv }) |
+            @Html.ActionLink("Details", "Details", new { id=item.manv }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.manv })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,81 @@
+﻿@model Res_man_4.Models.NHANVIEN
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_admin.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>NHANVIEN</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.tennv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tennv)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Chucvu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Chucvu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.calam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.calam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.khuvuc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.khuvuc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.diachi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.diachi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sodienthoai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sodienthoai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TAIKHOAN.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TAIKHOAN.email)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

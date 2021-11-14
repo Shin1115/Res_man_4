@@ -1,0 +1,67 @@
+﻿@model Res_man_4.Models.KHACHHANG
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_admin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>KHACHHANG</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.hoten)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hoten)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.diachi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.diachi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dienthoai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dienthoai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TAIKHOAN.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TAIKHOAN.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TINTUC.tieude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TINTUC.tieude)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.makh }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

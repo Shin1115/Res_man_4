@@ -1,0 +1,673 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="quanlynhahangModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BAN">
+          <Key>
+            <PropertyRef Name="maban" />
+          </Key>
+          <Property Name="maban" Type="int" Nullable="false" />
+          <Property Name="khuvuc" Type="varchar" MaxLength="50" />
+          <Property Name="soluongban" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="CHITIETHOADON">
+          <Key>
+            <PropertyRef Name="mahoadon" />
+            <PropertyRef Name="mamonan" />
+          </Key>
+          <Property Name="mahoadon" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="mamonan" Type="int" Nullable="false" />
+          <Property Name="tenmonan" Type="nvarchar" MaxLength="255" />
+          <Property Name="giamonan" Type="float" />
+          <Property Name="soluong" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="DANHGIA">
+          <Key>
+            <PropertyRef Name="madanhgia" />
+          </Key>
+          <Property Name="madanhgia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="mamonan" Type="int" />
+          <Property Name="noidung" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="DATBAN">
+          <Key>
+            <PropertyRef Name="madatban" />
+          </Key>
+          <Property Name="madatban" Type="int" Nullable="false" />
+          <Property Name="mamonan" Type="int" />
+          <Property Name="maban" Type="int" />
+          <Property Name="khuvuc" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="HOADON">
+          <Key>
+            <PropertyRef Name="mahoadon" />
+          </Key>
+          <Property Name="mahoadon" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ngaynhap" Type="date" />
+          <Property Name="ngayxuat" Type="date" />
+          <Property Name="maban" Type="int" />
+          <Property Name="status" Type="int" />
+        </EntityType>
+        <EntityType Name="KHACHHANG">
+          <Key>
+            <PropertyRef Name="makh" />
+          </Key>
+          <Property Name="makh" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="matin" Type="int" />
+          <Property Name="matk" Type="int" />
+          <Property Name="hoten" Type="nvarchar" MaxLength="255" />
+          <Property Name="diachi" Type="nvarchar" MaxLength="255" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="dienthoai" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="LOAIMONAN">
+          <Key>
+            <PropertyRef Name="maloai" />
+          </Key>
+          <Property Name="maloai" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tenloai" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="MONAN">
+          <Key>
+            <PropertyRef Name="mamonan" />
+          </Key>
+          <Property Name="mamonan" Type="int" Nullable="false" />
+          <Property Name="maloai" Type="int" />
+          <Property Name="tenmonan" Type="nvarchar" MaxLength="255" />
+          <Property Name="ngaydat" Type="datetime" />
+          <Property Name="giamonan" Type="float" />
+          <Property Name="soluong" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="hinhmonan" Type="image" />
+          <Property Name="solanmua" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="NHANVIEN">
+          <Key>
+            <PropertyRef Name="manv" />
+          </Key>
+          <Property Name="manv" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="matk" Type="int" />
+          <Property Name="tennv" Type="nvarchar" MaxLength="50" />
+          <Property Name="Chucvu" Type="nvarchar" MaxLength="50" />
+          <Property Name="calam" Type="nvarchar" MaxLength="50" />
+          <Property Name="khuvuc" Type="varchar" MaxLength="50" />
+          <Property Name="diachi" Type="nvarchar(max)" />
+          <Property Name="sodienthoai" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="TAIKHOAN">
+          <Key>
+            <PropertyRef Name="matk" />
+          </Key>
+          <Property Name="matk" Type="int" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+          <Property Name="matkhau" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TINTUC">
+          <Key>
+            <PropertyRef Name="matin" />
+          </Key>
+          <Property Name="matin" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tieude" Type="nvarchar" MaxLength="255" />
+          <Property Name="noidung" Type="nvarchar(max)" />
+          <Property Name="ngaydang" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_DANHGIA_monan">
+          <End Role="MONAN" Type="Self.MONAN" Multiplicity="0..1" />
+          <End Role="DANHGIA" Type="Self.DANHGIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MONAN">
+              <PropertyRef Name="mamonan" />
+            </Principal>
+            <Dependent Role="DANHGIA">
+              <PropertyRef Name="mamonan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DATBAN_BAN">
+          <End Role="BAN" Type="Self.BAN" Multiplicity="0..1" />
+          <End Role="DATBAN" Type="Self.DATBAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BAN">
+              <PropertyRef Name="maban" />
+            </Principal>
+            <Dependent Role="DATBAN">
+              <PropertyRef Name="maban" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DATBAN_MONAN">
+          <End Role="MONAN" Type="Self.MONAN" Multiplicity="0..1" />
+          <End Role="DATBAN" Type="Self.DATBAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MONAN">
+              <PropertyRef Name="mamonan" />
+            </Principal>
+            <Dependent Role="DATBAN">
+              <PropertyRef Name="mamonan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HOADON_BAN">
+          <End Role="BAN" Type="Self.BAN" Multiplicity="0..1" />
+          <End Role="HOADON" Type="Self.HOADON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BAN">
+              <PropertyRef Name="maban" />
+            </Principal>
+            <Dependent Role="HOADON">
+              <PropertyRef Name="maban" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KHACHHANG_TAIKHOAN">
+          <End Role="TAIKHOAN" Type="Self.TAIKHOAN" Multiplicity="0..1" />
+          <End Role="KHACHHANG" Type="Self.KHACHHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAIKHOAN">
+              <PropertyRef Name="matk" />
+            </Principal>
+            <Dependent Role="KHACHHANG">
+              <PropertyRef Name="matk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KHACHHANG_TINTUC">
+          <End Role="TINTUC" Type="Self.TINTUC" Multiplicity="0..1" />
+          <End Role="KHACHHANG" Type="Self.KHACHHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TINTUC">
+              <PropertyRef Name="matin" />
+            </Principal>
+            <Dependent Role="KHACHHANG">
+              <PropertyRef Name="matin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MONAN_loaimonan">
+          <End Role="LOAIMONAN" Type="Self.LOAIMONAN" Multiplicity="0..1" />
+          <End Role="MONAN" Type="Self.MONAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOAIMONAN">
+              <PropertyRef Name="maloai" />
+            </Principal>
+            <Dependent Role="MONAN">
+              <PropertyRef Name="maloai" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NHANVIEN_DATBAN">
+          <End Role="TAIKHOAN" Type="Self.TAIKHOAN" Multiplicity="0..1" />
+          <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAIKHOAN">
+              <PropertyRef Name="matk" />
+            </Principal>
+            <Dependent Role="NHANVIEN">
+              <PropertyRef Name="matk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="quanlynhahangModelStoreContainer">
+          <EntitySet Name="BAN" EntityType="Self.BAN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CHITIETHOADON" EntityType="Self.CHITIETHOADON" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DANHGIA" EntityType="Self.DANHGIA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DATBAN" EntityType="Self.DATBAN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HOADON" EntityType="Self.HOADON" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KHACHHANG" EntityType="Self.KHACHHANG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LOAIMONAN" EntityType="Self.LOAIMONAN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MONAN" EntityType="Self.MONAN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NHANVIEN" EntityType="Self.NHANVIEN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TAIKHOAN" EntityType="Self.TAIKHOAN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TINTUC" EntityType="Self.TINTUC" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DANHGIA_monan" Association="Self.FK_DANHGIA_monan">
+            <End Role="MONAN" EntitySet="MONAN" />
+            <End Role="DANHGIA" EntitySet="DANHGIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DATBAN_BAN" Association="Self.FK_DATBAN_BAN">
+            <End Role="BAN" EntitySet="BAN" />
+            <End Role="DATBAN" EntitySet="DATBAN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DATBAN_MONAN" Association="Self.FK_DATBAN_MONAN">
+            <End Role="MONAN" EntitySet="MONAN" />
+            <End Role="DATBAN" EntitySet="DATBAN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HOADON_BAN" Association="Self.FK_HOADON_BAN">
+            <End Role="BAN" EntitySet="BAN" />
+            <End Role="HOADON" EntitySet="HOADON" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KHACHHANG_TAIKHOAN" Association="Self.FK_KHACHHANG_TAIKHOAN">
+            <End Role="TAIKHOAN" EntitySet="TAIKHOAN" />
+            <End Role="KHACHHANG" EntitySet="KHACHHANG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KHACHHANG_TINTUC" Association="Self.FK_KHACHHANG_TINTUC">
+            <End Role="TINTUC" EntitySet="TINTUC" />
+            <End Role="KHACHHANG" EntitySet="KHACHHANG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MONAN_loaimonan" Association="Self.FK_MONAN_loaimonan">
+            <End Role="LOAIMONAN" EntitySet="LOAIMONAN" />
+            <End Role="MONAN" EntitySet="MONAN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NHANVIEN_DATBAN" Association="Self.FK_NHANVIEN_DATBAN">
+            <End Role="TAIKHOAN" EntitySet="TAIKHOAN" />
+            <End Role="NHANVIEN" EntitySet="NHANVIEN" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="quanlynhahangModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="quanlynhahangEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BAN" EntityType="quanlynhahangModel.BAN" />
+          <EntitySet Name="CHITIETHOADON" EntityType="quanlynhahangModel.CHITIETHOADON" />
+          <EntitySet Name="DANHGIA" EntityType="quanlynhahangModel.DANHGIA" />
+          <EntitySet Name="DATBAN" EntityType="quanlynhahangModel.DATBAN" />
+          <EntitySet Name="HOADON" EntityType="quanlynhahangModel.HOADON" />
+          <EntitySet Name="KHACHHANG" EntityType="quanlynhahangModel.KHACHHANG" />
+          <EntitySet Name="LOAIMONAN" EntityType="quanlynhahangModel.LOAIMONAN" />
+          <EntitySet Name="MONAN" EntityType="quanlynhahangModel.MONAN" />
+          <EntitySet Name="NHANVIEN" EntityType="quanlynhahangModel.NHANVIEN" />
+          <EntitySet Name="TAIKHOAN" EntityType="quanlynhahangModel.TAIKHOAN" />
+          <EntitySet Name="TINTUC" EntityType="quanlynhahangModel.TINTUC" />
+          <AssociationSet Name="FK_DATBAN_BAN" Association="quanlynhahangModel.FK_DATBAN_BAN">
+            <End Role="BAN" EntitySet="BAN" />
+            <End Role="DATBAN" EntitySet="DATBAN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HOADON_BAN" Association="quanlynhahangModel.FK_HOADON_BAN">
+            <End Role="BAN" EntitySet="BAN" />
+            <End Role="HOADON" EntitySet="HOADON" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DANHGIA_monan" Association="quanlynhahangModel.FK_DANHGIA_monan">
+            <End Role="MONAN" EntitySet="MONAN" />
+            <End Role="DANHGIA" EntitySet="DANHGIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DATBAN_MONAN" Association="quanlynhahangModel.FK_DATBAN_MONAN">
+            <End Role="MONAN" EntitySet="MONAN" />
+            <End Role="DATBAN" EntitySet="DATBAN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KHACHHANG_TAIKHOAN" Association="quanlynhahangModel.FK_KHACHHANG_TAIKHOAN">
+            <End Role="TAIKHOAN" EntitySet="TAIKHOAN" />
+            <End Role="KHACHHANG" EntitySet="KHACHHANG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KHACHHANG_TINTUC" Association="quanlynhahangModel.FK_KHACHHANG_TINTUC">
+            <End Role="TINTUC" EntitySet="TINTUC" />
+            <End Role="KHACHHANG" EntitySet="KHACHHANG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MONAN_loaimonan" Association="quanlynhahangModel.FK_MONAN_loaimonan">
+            <End Role="LOAIMONAN" EntitySet="LOAIMONAN" />
+            <End Role="MONAN" EntitySet="MONAN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NHANVIEN_DATBAN" Association="quanlynhahangModel.FK_NHANVIEN_DATBAN">
+            <End Role="TAIKHOAN" EntitySet="TAIKHOAN" />
+            <End Role="NHANVIEN" EntitySet="NHANVIEN" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="BAN">
+          <Key>
+            <PropertyRef Name="maban" />
+          </Key>
+          <Property Name="maban" Type="Int32" Nullable="false" />
+          <Property Name="khuvuc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="soluongban" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="DATBAN" Relationship="quanlynhahangModel.FK_DATBAN_BAN" FromRole="BAN" ToRole="DATBAN" />
+          <NavigationProperty Name="HOADON" Relationship="quanlynhahangModel.FK_HOADON_BAN" FromRole="BAN" ToRole="HOADON" />
+        </EntityType>
+        <EntityType Name="CHITIETHOADON">
+          <Key>
+            <PropertyRef Name="mahoadon" />
+            <PropertyRef Name="mamonan" />
+          </Key>
+          <Property Name="mahoadon" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="mamonan" Type="Int32" Nullable="false" />
+          <Property Name="tenmonan" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="giamonan" Type="Double" />
+          <Property Name="soluong" Type="Decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="DANHGIA">
+          <Key>
+            <PropertyRef Name="madanhgia" />
+          </Key>
+          <Property Name="madanhgia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="mamonan" Type="Int32" />
+          <Property Name="noidung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MONAN" Relationship="quanlynhahangModel.FK_DANHGIA_monan" FromRole="DANHGIA" ToRole="MONAN" />
+        </EntityType>
+        <EntityType Name="DATBAN">
+          <Key>
+            <PropertyRef Name="madatban" />
+          </Key>
+          <Property Name="madatban" Type="Int32" Nullable="false" />
+          <Property Name="mamonan" Type="Int32" />
+          <Property Name="maban" Type="Int32" />
+          <Property Name="khuvuc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BAN" Relationship="quanlynhahangModel.FK_DATBAN_BAN" FromRole="DATBAN" ToRole="BAN" />
+          <NavigationProperty Name="MONAN" Relationship="quanlynhahangModel.FK_DATBAN_MONAN" FromRole="DATBAN" ToRole="MONAN" />
+        </EntityType>
+        <EntityType Name="HOADON">
+          <Key>
+            <PropertyRef Name="mahoadon" />
+          </Key>
+          <Property Name="mahoadon" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ngaynhap" Type="DateTime" Precision="0" />
+          <Property Name="ngayxuat" Type="DateTime" Precision="0" />
+          <Property Name="maban" Type="Int32" />
+          <Property Name="status" Type="Int32" />
+          <NavigationProperty Name="BAN" Relationship="quanlynhahangModel.FK_HOADON_BAN" FromRole="HOADON" ToRole="BAN" />
+        </EntityType>
+        <EntityType Name="KHACHHANG">
+          <Key>
+            <PropertyRef Name="makh" />
+          </Key>
+          <Property Name="makh" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="matin" Type="Int32" />
+          <Property Name="matk" Type="Int32" />
+          <Property Name="hoten" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="diachi" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dienthoai" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="TAIKHOAN" Relationship="quanlynhahangModel.FK_KHACHHANG_TAIKHOAN" FromRole="KHACHHANG" ToRole="TAIKHOAN" />
+          <NavigationProperty Name="TINTUC" Relationship="quanlynhahangModel.FK_KHACHHANG_TINTUC" FromRole="KHACHHANG" ToRole="TINTUC" />
+        </EntityType>
+        <EntityType Name="LOAIMONAN">
+          <Key>
+            <PropertyRef Name="maloai" />
+          </Key>
+          <Property Name="maloai" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tenloai" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MONAN" Relationship="quanlynhahangModel.FK_MONAN_loaimonan" FromRole="LOAIMONAN" ToRole="MONAN" />
+        </EntityType>
+        <EntityType Name="MONAN">
+          <Key>
+            <PropertyRef Name="mamonan" />
+          </Key>
+          <Property Name="mamonan" Type="Int32" Nullable="false" />
+          <Property Name="maloai" Type="Int32" />
+          <Property Name="tenmonan" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ngaydat" Type="DateTime" Precision="3" />
+          <Property Name="giamonan" Type="Double" />
+          <Property Name="soluong" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="hinhmonan" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="solanmua" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="DANHGIA" Relationship="quanlynhahangModel.FK_DANHGIA_monan" FromRole="MONAN" ToRole="DANHGIA" />
+          <NavigationProperty Name="DATBAN" Relationship="quanlynhahangModel.FK_DATBAN_MONAN" FromRole="MONAN" ToRole="DATBAN" />
+          <NavigationProperty Name="LOAIMONAN" Relationship="quanlynhahangModel.FK_MONAN_loaimonan" FromRole="MONAN" ToRole="LOAIMONAN" />
+        </EntityType>
+        <EntityType Name="NHANVIEN">
+          <Key>
+            <PropertyRef Name="manv" />
+          </Key>
+          <Property Name="manv" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="matk" Type="Int32" />
+          <Property Name="tennv" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Chucvu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="calam" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="khuvuc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="diachi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="sodienthoai" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="TAIKHOAN" Relationship="quanlynhahangModel.FK_NHANVIEN_DATBAN" FromRole="NHANVIEN" ToRole="TAIKHOAN" />
+        </EntityType>
+        <EntityType Name="TAIKHOAN">
+          <Key>
+            <PropertyRef Name="matk" />
+          </Key>
+          <Property Name="matk" Type="Int32" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="matkhau" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="KHACHHANG" Relationship="quanlynhahangModel.FK_KHACHHANG_TAIKHOAN" FromRole="TAIKHOAN" ToRole="KHACHHANG" />
+          <NavigationProperty Name="NHANVIEN" Relationship="quanlynhahangModel.FK_NHANVIEN_DATBAN" FromRole="TAIKHOAN" ToRole="NHANVIEN" />
+        </EntityType>
+        <EntityType Name="TINTUC">
+          <Key>
+            <PropertyRef Name="matin" />
+          </Key>
+          <Property Name="matin" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tieude" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="noidung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ngaydang" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="KHACHHANG" Relationship="quanlynhahangModel.FK_KHACHHANG_TINTUC" FromRole="TINTUC" ToRole="KHACHHANG" />
+        </EntityType>
+        <Association Name="FK_DATBAN_BAN">
+          <End Type="quanlynhahangModel.BAN" Role="BAN" Multiplicity="0..1" />
+          <End Type="quanlynhahangModel.DATBAN" Role="DATBAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BAN">
+              <PropertyRef Name="maban" />
+            </Principal>
+            <Dependent Role="DATBAN">
+              <PropertyRef Name="maban" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HOADON_BAN">
+          <End Type="quanlynhahangModel.BAN" Role="BAN" Multiplicity="0..1" />
+          <End Type="quanlynhahangModel.HOADON" Role="HOADON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BAN">
+              <PropertyRef Name="maban" />
+            </Principal>
+            <Dependent Role="HOADON">
+              <PropertyRef Name="maban" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DANHGIA_monan">
+          <End Type="quanlynhahangModel.MONAN" Role="MONAN" Multiplicity="0..1" />
+          <End Type="quanlynhahangModel.DANHGIA" Role="DANHGIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MONAN">
+              <PropertyRef Name="mamonan" />
+            </Principal>
+            <Dependent Role="DANHGIA">
+              <PropertyRef Name="mamonan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DATBAN_MONAN">
+          <End Type="quanlynhahangModel.MONAN" Role="MONAN" Multiplicity="0..1" />
+          <End Type="quanlynhahangModel.DATBAN" Role="DATBAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MONAN">
+              <PropertyRef Name="mamonan" />
+            </Principal>
+            <Dependent Role="DATBAN">
+              <PropertyRef Name="mamonan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KHACHHANG_TAIKHOAN">
+          <End Type="quanlynhahangModel.TAIKHOAN" Role="TAIKHOAN" Multiplicity="0..1" />
+          <End Type="quanlynhahangModel.KHACHHANG" Role="KHACHHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAIKHOAN">
+              <PropertyRef Name="matk" />
+            </Principal>
+            <Dependent Role="KHACHHANG">
+              <PropertyRef Name="matk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KHACHHANG_TINTUC">
+          <End Type="quanlynhahangModel.TINTUC" Role="TINTUC" Multiplicity="0..1" />
+          <End Type="quanlynhahangModel.KHACHHANG" Role="KHACHHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TINTUC">
+              <PropertyRef Name="matin" />
+            </Principal>
+            <Dependent Role="KHACHHANG">
+              <PropertyRef Name="matin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MONAN_loaimonan">
+          <End Type="quanlynhahangModel.LOAIMONAN" Role="LOAIMONAN" Multiplicity="0..1" />
+          <End Type="quanlynhahangModel.MONAN" Role="MONAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOAIMONAN">
+              <PropertyRef Name="maloai" />
+            </Principal>
+            <Dependent Role="MONAN">
+              <PropertyRef Name="maloai" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NHANVIEN_DATBAN">
+          <End Type="quanlynhahangModel.TAIKHOAN" Role="TAIKHOAN" Multiplicity="0..1" />
+          <End Type="quanlynhahangModel.NHANVIEN" Role="NHANVIEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAIKHOAN">
+              <PropertyRef Name="matk" />
+            </Principal>
+            <Dependent Role="NHANVIEN">
+              <PropertyRef Name="matk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="quanlynhahangModelStoreContainer" CdmEntityContainer="quanlynhahangEntities">
+          <EntitySetMapping Name="BAN">
+            <EntityTypeMapping TypeName="quanlynhahangModel.BAN">
+              <MappingFragment StoreEntitySet="BAN">
+                <ScalarProperty Name="soluongban" ColumnName="soluongban" />
+                <ScalarProperty Name="khuvuc" ColumnName="khuvuc" />
+                <ScalarProperty Name="maban" ColumnName="maban" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CHITIETHOADON">
+            <EntityTypeMapping TypeName="quanlynhahangModel.CHITIETHOADON">
+              <MappingFragment StoreEntitySet="CHITIETHOADON">
+                <ScalarProperty Name="soluong" ColumnName="soluong" />
+                <ScalarProperty Name="giamonan" ColumnName="giamonan" />
+                <ScalarProperty Name="tenmonan" ColumnName="tenmonan" />
+                <ScalarProperty Name="mamonan" ColumnName="mamonan" />
+                <ScalarProperty Name="mahoadon" ColumnName="mahoadon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DANHGIA">
+            <EntityTypeMapping TypeName="quanlynhahangModel.DANHGIA">
+              <MappingFragment StoreEntitySet="DANHGIA">
+                <ScalarProperty Name="noidung" ColumnName="noidung" />
+                <ScalarProperty Name="mamonan" ColumnName="mamonan" />
+                <ScalarProperty Name="madanhgia" ColumnName="madanhgia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DATBAN">
+            <EntityTypeMapping TypeName="quanlynhahangModel.DATBAN">
+              <MappingFragment StoreEntitySet="DATBAN">
+                <ScalarProperty Name="khuvuc" ColumnName="khuvuc" />
+                <ScalarProperty Name="maban" ColumnName="maban" />
+                <ScalarProperty Name="mamonan" ColumnName="mamonan" />
+                <ScalarProperty Name="madatban" ColumnName="madatban" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HOADON">
+            <EntityTypeMapping TypeName="quanlynhahangModel.HOADON">
+              <MappingFragment StoreEntitySet="HOADON">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="maban" ColumnName="maban" />
+                <ScalarProperty Name="ngayxuat" ColumnName="ngayxuat" />
+                <ScalarProperty Name="ngaynhap" ColumnName="ngaynhap" />
+                <ScalarProperty Name="mahoadon" ColumnName="mahoadon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KHACHHANG">
+            <EntityTypeMapping TypeName="quanlynhahangModel.KHACHHANG">
+              <MappingFragment StoreEntitySet="KHACHHANG">
+                <ScalarProperty Name="dienthoai" ColumnName="dienthoai" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="diachi" ColumnName="diachi" />
+                <ScalarProperty Name="hoten" ColumnName="hoten" />
+                <ScalarProperty Name="matk" ColumnName="matk" />
+                <ScalarProperty Name="matin" ColumnName="matin" />
+                <ScalarProperty Name="makh" ColumnName="makh" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOAIMONAN">
+            <EntityTypeMapping TypeName="quanlynhahangModel.LOAIMONAN">
+              <MappingFragment StoreEntitySet="LOAIMONAN">
+                <ScalarProperty Name="tenloai" ColumnName="tenloai" />
+                <ScalarProperty Name="maloai" ColumnName="maloai" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MONAN">
+            <EntityTypeMapping TypeName="quanlynhahangModel.MONAN">
+              <MappingFragment StoreEntitySet="MONAN">
+                <ScalarProperty Name="solanmua" ColumnName="solanmua" />
+                <ScalarProperty Name="hinhmonan" ColumnName="hinhmonan" />
+                <ScalarProperty Name="soluong" ColumnName="soluong" />
+                <ScalarProperty Name="giamonan" ColumnName="giamonan" />
+                <ScalarProperty Name="ngaydat" ColumnName="ngaydat" />
+                <ScalarProperty Name="tenmonan" ColumnName="tenmonan" />
+                <ScalarProperty Name="maloai" ColumnName="maloai" />
+                <ScalarProperty Name="mamonan" ColumnName="mamonan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NHANVIEN">
+            <EntityTypeMapping TypeName="quanlynhahangModel.NHANVIEN">
+              <MappingFragment StoreEntitySet="NHANVIEN">
+                <ScalarProperty Name="sodienthoai" ColumnName="sodienthoai" />
+                <ScalarProperty Name="diachi" ColumnName="diachi" />
+                <ScalarProperty Name="khuvuc" ColumnName="khuvuc" />
+                <ScalarProperty Name="calam" ColumnName="calam" />
+                <ScalarProperty Name="Chucvu" ColumnName="Chucvu" />
+                <ScalarProperty Name="tennv" ColumnName="tennv" />
+                <ScalarProperty Name="matk" ColumnName="matk" />
+                <ScalarProperty Name="manv" ColumnName="manv" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TAIKHOAN">
+            <EntityTypeMapping TypeName="quanlynhahangModel.TAIKHOAN">
+              <MappingFragment StoreEntitySet="TAIKHOAN">
+                <ScalarProperty Name="matkhau" ColumnName="matkhau" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="matk" ColumnName="matk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TINTUC">
+            <EntityTypeMapping TypeName="quanlynhahangModel.TINTUC">
+              <MappingFragment StoreEntitySet="TINTUC">
+                <ScalarProperty Name="ngaydang" ColumnName="ngaydang" />
+                <ScalarProperty Name="noidung" ColumnName="noidung" />
+                <ScalarProperty Name="tieude" ColumnName="tieude" />
+                <ScalarProperty Name="matin" ColumnName="matin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

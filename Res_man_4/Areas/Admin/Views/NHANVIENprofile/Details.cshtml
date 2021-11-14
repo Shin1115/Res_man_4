@@ -1,0 +1,75 @@
+﻿@model Res_man_4.Models.NHANVIEN
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_admin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>NHANVIEN</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.tennv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tennv)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Chucvu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Chucvu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.calam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.calam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.khuvuc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.khuvuc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.diachi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.diachi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sodienthoai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sodienthoai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TAIKHOAN.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TAIKHOAN.email)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.manv }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

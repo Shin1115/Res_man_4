@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Thêm mới</h2>
+<form action="/Nhanvien/Create" method="post">
+    <div class="form-group">
+        <label>Mã Nhân Viên</label>
+        <input type="text" class="form-control" id="manv" name="manv" />
+    </div>
+    <div class="form-group">
+        <label>Tên nhân viên</label>
+        <input type="text" class="form-control" id="tennv" name="tennv" />
+    </div>
+    <div class="form-group">
+        <label>Chức vụ</label>
+        <input type="text" class="form-control" id="Chucvu" name="Chucvu" />
+    </div>
+    <div class="form-group">
+        <label>Ca làm</label>>
+        <input type="text" class="form-control" id="calam" name="calam" />
+    </div>
+    <div class="form-group">
+        <label>Khu vực</label>
+        <input type="text" class="form-control" id="khuvuc" name="khuvuc" />
+    </div>
+    <div class="form-group">
+        <label>Địa chỉ</label>
+        <input type="text" class="form-control" id="diachi" name="diachi" />
+    </div>
+    <div class="form-group">
+        <label>Số điện thoại</label>
+        <input type="text" class="form-control" id="sodienthoai" name="sodienthoai" />
+    </div>
+    <button class="btn btn-primary" type="submit">Save</button>
+</form>
+
